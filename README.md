@@ -13,3 +13,13 @@ In order to get involved, please write directly to the current maintainer of the
 
 # Acknowledgments
 This work is sposored and supported by CableLabs
+
+# xml2rfc Tips & Trics
+
+To correctly use references even when not online, you can include the references directly. To retrieve a complete reference for an RFC, you can use the browser and go to:
+
+	https://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.<XXXX>.xml
+
+where XXXX is the number of the RFC. The retrieved XML can be directly included in the XML source file instead of adding a single \&XXXX\; reference in the references section
+
+
