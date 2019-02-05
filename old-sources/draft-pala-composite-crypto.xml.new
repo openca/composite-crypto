@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE rfc SYSTEM 'rfc2629.dtd' [
+<!ENTITY rfc2119 PUBLIC '' 'http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml'>
+<!--	<!ENTITY rfc5234 PUBLIC '' 'http://xml.resource.org/public/rfc/bibxml/reference.RFC.5234.xml'>
+	<!ENTITY rfc3986 PUBLIC '' 'http://xml.resource.org/public/rfc/bibxml/reference.RFC.3986.xml'>
+	<!ENTITY rfc2119 PUBLIC '' 'http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml'>
+	<!ENTITY rfc2560 PUBLIC '' 'http://xml.resource.org/public/rfc/bibxml/reference.RFC.6960.xml'>
+	<!ENTITY rfc5019 PUBLIC '' 'http://xml.resource.org/public/rfc/bibxml/reference.RFC.5019.xml'>
+	<!ENTITY rfc5280 PUBLIC '' 'http://xml.resource.org/public/rfc/bibxml/reference.RFC.5280.xml'>
+	<!ENTITY rfc4501 PUBLIC '' 'http://xml.resource.org/public/rfc/bibxml/reference.RFC.4501.xml'>
+-->
+]>
+
+<rfc category="exp" docName="draft-pala-composite-crypto-00" ipr="trust200902">
+    
+<?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
+
+<?rfc toc="yes" ?>
+<?rfc tocdepth="5"?>
+<?rfc symrefs="yes" ?>
+<?rfc sortrefs="yes"?>
+<?rfc iprnotified="no" ?>
+<?rfc strict="yes" ?>
+<?rfc compact="yes" ?>
+<?rfc subcompact="no" ?>
+
+  <front>
+  	<title abbrev="CPS">Composite Public Keys and Signatures</title>
+  	<author initials="M.P." surname="Pala" fullname="Massimiliano Pala">
+  	  <organization>CableLabs</organization>
+    	<address>
+      	<postal>
+        	<street>858 Coal Creek Cir</street>
+        	<city>Louisville</city>
+        	<region>CO</region>
+        	<code>80027</code>
+        	<country>US</country>
+      	</postal>
+      	<email>m.pala@cablelabs.com</email>
+      	<uri>http://www.linkedin.com/in/mpala</uri>
+    	</address>
+  	</author>
+ 
+  	<date month="August" year="2018" />
+  	<area>Security</area>
+  	<workgroup></workgroup>
+  	<keyword>PKI</keyword>
+  	<keyword>Crypto Agility</keyword>
+  	<keyword>Quantum Resistance</keyword>
+  	<abstract>
+    	<t>
+    		PKIs are used to provide scalability and ease key management. One type of PKIs that is
+    		predominant for securing communications and data is based on the X.509 standard.
+				Since the security of PKIs, ultimately, depends on the security of the cryptographic
+				building blocks that are used for authentication and encryption, the standards
+				community made algorithm agility one of the main goals to provide the possibility
+				to use different algorithms and potentially upgrade to newly available algorithms
+				when needed.
+    
+   			<vspace blankLines="1" />
+
+   			In particular, this specification defines how to distribute OCSP responses over DNS
+   			and how to define OCSP-over-DNS URLs in certificates.
+
+   			The use of the DNS system to distribute such information is meant to lower the costs of
+   			providing revocation services (by leveraging the distributed nature of DNS cache) and
+   			increase the availability of revocation information (by providing an additional access
+   			method for revocation information retrieval). 
+   		</t>
+  	</abstract>
+	</front>
+
+	<middle>
+
+		<section title="Requirements notation">
+			<t>
+				The key words "MUST", "MUST NOT", "REQUIRED", "SHALL",
+				"SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",
+				and "OPTIONAL" in this document are to be interpreted as
+				described in <xref target="RFC2119"/>.
+			</t>
+		</section>
+
+		<section anchor="intro" title="Introduction"> 
+			<t>
+				With the definition of new algorithms (e.g. more efficient factoring techniques) and
+				technologies (e.g., quantum-based computing devices) that might be available in the
+				short future, the need to provide an easy-to-deploy and efficient solution capable of
+				providing multi-algorithms authentication is paramount.
+
+				<vspace blankLines="1" />
+
+				Today there are no complete or general solutions that allow for the securing PKI deployments
+				capable of addressing the envisioned problem that fit in today's trust models. In particular,
+				whichever the specific standard or technology is used in a PKI (e.g., X.509, PGP, etc.), no
+				deployments currently cover the possibility to use multiple algorithms in a combined fashion
+				to further secure the infrastructure in case one (or more) algorithms are deemed compromised.
+				Moreover, existing proposals to add support for additional keys (and signatures) in certificates
+				focus on the implementation of single algorithms mostly targeting quantum resistant ones.
+				This solution differs in that it allows to combine one or more algorithms today (e.g., RSA
+				and ECDSA) and provide a path for multi-algorithm agility that can address post-quantum and
+				future crpto-algorithm agility needs.
+
+				<vspace blankLines="1" />
+
+				This document defines two new building blocks that can be applied to many environments
+				where Public Key authentication is used – i.e., from the generation of certificates that
+				are authenticated with multiple signatures (i.e., using multiple keys that may or may not
+				use different cryptographic schemes or different number of security bits), to the
+				possibility of specifying composite public keys (instead of one) in a certificate (or
+				authentication tokens), or even to secure revocation and timestamping information by using
+				multiple signatures that use different hashing and signing algorithms.
+
+				The two new building blocks are Composite Signatures and Composite Keys.
+			
+				<vspace blankLines="1" />
+
+				This document describes the encoding of the new building blocks and their application to
+				different X.509 core data structures that are used in PKIs.
+
+			</t>
+		</section>
+
+		<section anchor="scope" title="Scope Statement">
+			<t>
+				This document focuses only on the definition of the composite keys
+				and composite signatures definitions for X.509 based PKIs. In particular,
+				this document defines the encoding rules for the two building blocks and
+				their usage in existing X.509 data structures.
+			</t>
+		</section>
+
+		<section anchor="cc_key_pub" title="Composite Public Keys">
+		</section>
+
+		<section anchor="cc_key_priv" title="Composite Private Keys">
+		</section>
+
+		<section anchor="cc_sig" title="Composite Signatures">
+		</section>
+
+		<section anchor="cc_cert" title="Use in X.509 Certificates">
+		</section>
+
+		<section anchor="cc_crl" title="Use in X.509 CRLs">
+		</section>
+
+		<section anchor="cc_ocsp" title="Use in X.509 OCSP Messages">
+		</section>
+
+		<section anchor="cc_pkcs7" title="Use in PKCS#7 Structures">
+		</section>
+
+		<section anchor="cc_cms" title="Use in CMS Structures">
+		</section>
+
+		<section anchor="cc_pkcs1" title="Use in PKCS#1 Structures">
+		</section>
+
+		<section anchor="cc_pkcs8" title="Use in PKCS#8 Structures">
+		</section>
+
+		<section anchor="cc_pkcs12" title="Use in PKCS#12 Structures">
+		</section>
+
+		<section anchor="acks" title="Acknowledgments">
+			<t>
+				The authors would like to thank everybody who provided insightful comments and helped in the
+				definition of the deployment considerations. In particular, the authors would like to thank
+				Scott A. Rea for his support. We also would like to thank DigiCert and the initial discussion
+				and support for the initial idea. Last but not least, the authors would like to thank all
+				the people that expressed interest in implementing support for this proposal.
+			</t>
+		</section>
+
+	</middle>
+
+	<back>
+
+		<references title='Normative References'>
+
+			&rfc2119;
+
+			<!--
+			<reference anchor="RFC2119" target="https://www.rfc-editor.org/info/rfc2119">
+				<front>
+					<title>Key words for use in RFCs to Indicate Requirement Levels</title>
+					<author initials="S." surname="Bradner" fullname="S. Bradner">
+						<organization/>
+					</author>
+					<date year="1997" month="March"/>
+					<abstract>
+						<t>In many standards track documents several words are used to signify the requirements in the specification.  These words are often capitalized. This document defines these words as they should be interpreted in IETF documents.  This document specifies an Internet Best Current Practices for the Internet Community, and requests discussion and suggestions for improvements.</t>
+					</abstract>
+				</front>
+				<seriesInfo name="BCP" value="14"/>
+				<seriesInfo name="RFC" value="2119"/>
+				<seriesInfo name="DOI" value="10.17487/RFC2119"/>
+			</reference>
+			-->
+			
+		<!--
+			&rfc5234;
+			&rfc3986;
+			&rfc2119;
+			&rfc2560;
+			&rfc5019;
+			&rfc5280;
+			&rfc4501;
+		-->
+
+		</references>
+
+	</back>
+</rfc>

@@ -1,7 +1,7 @@
 # Makefile for RFC
 
 XML2RFC :=xml2rfc
-OUTDIR  := output
+OUTDIR  := .
 LOGDIR  := logs
 
 SOURCES= \
@@ -12,10 +12,12 @@ all:: banner $(SOURCES)
 	@echo
 	 
 clean:
-	@rm -f "$(OUTDIR)"/* "$(LOGDIR)"/*
+	@rm -rf "$(OUTDIR)/"draft-*.{txt,html}
+	@rm -rf "$(LOGDIR)/"*.{txt,log}
 
 distclean: clean
-	@rm -rf "$(OUTDIR)" "$(LOGDIR)"
+	@[ "$(OUTDIR)" = "." ] || rm -rf "$(OUTDIR)"
+	@[ "$(LOGDIR)" = "." ] || rm -rf "$(LOGDIR)"
 
 $(SOURCES)::
 	@echo ; \
@@ -25,7 +27,7 @@ $(SOURCES)::
 	out=`echo $@ | sed "s|.xml|.txt|"` ; \
 	out=`cat "$@" | grep docName | head -n 1 | sed "s|.*docName\=\"||" | sed "s|\".*||"`; \
 	echo -n "    - [TXT] format ... " && \
-	$(XML2RFC) $@ -u -o "$(OUTDIR)/$$out.txt" 2>$(LOGDIR)/err.txt >$(LOGDIR)/log.txt && \
+	$(XML2RFC) $@ -u -o "$(OUTDIR)/$$out.txt" 2>$(LOGDIR)/$$out.err.txt >$(LOGDIR)/$$out.log.txt && \
 	echo "Ok." || echo "ERROR (check the err file)."; \
 	out=`echo $@ | sed "s|.xml|.html|"` ; \
 	out=`cat "$@" | grep docName | head -n 1 | sed "s|.*docName\=\"||" | sed "s|\".*||"`; \

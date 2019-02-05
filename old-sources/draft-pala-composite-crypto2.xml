@@ -12,7 +12,7 @@
 -->
 ]>
 
-<rfc category="exp" docName="draft-pala-composite-crypto-00" ipr="trust200902">
+<rfc category="std" docName="draft-pala-composite-crypto-99" ipr="trust200902">
     
 <?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
 
@@ -26,7 +26,7 @@
 <?rfc subcompact="no" ?>
 
   <front>
-  	<title abbrev="CKS">Composite Public Keys and Signatures</title>
+  	<title abbrev="LLL">Composite Public Keys and Signatures</title>
   	<author initials="M.P." surname="Pala" fullname="Massimiliano Pala">
   	  <organization>CableLabs</organization>
     	<address>
@@ -35,14 +35,14 @@
         	<city>Louisville</city>
         	<region>CO</region>
         	<code>80027</code>
-        	<country>USA</country>
+        	<country>US</country>
       	</postal>
-      	<email>director@openca.org</email>
+      	<email>m.pala@cablelabs.com</email>
       	<uri>http://www.linkedin.com/in/mpala</uri>
     	</address>
   	</author>
  
-  	<date month="February" year="2019" />
+  	<date month="August" year="2018" />
   	<area>Security</area>
   	<workgroup></workgroup>
   	<keyword>PKI</keyword>
@@ -59,10 +59,9 @@
     
    			<vspace blankLines="1" />
 
-   			The CompositeCrypto (i.e., CompositeKey and CompositeSignature structures) described
-   			in this document provides an additional tool that enables the use of multiple algorithms
-   			to authenticate data without the need to use multiple certificates and more complex data
-   			structures.
+   			CompositeKey and CompositeSignature described in this document provide an additional
+   			tool that enables the use of multiple algorithms to authenticate data without the need
+   			to use multiple certificates and more complex data structures.
 
    			<vspace blankLines="1" />
 
