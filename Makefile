@@ -27,12 +27,12 @@ $(SOURCES)::
 	out=`echo $@ | sed "s|.xml|.txt|"` ; \
 	out=`cat "$@" | grep docName | head -n 1 | sed "s|.*docName\=\"||" | sed "s|\".*||"`; \
 	echo -n "    - [TXT] format ... " && \
-	$(XML2RFC) $@ -u -o "$(OUTDIR)/$$out.txt" 2>$(LOGDIR)/$$out.err.txt >$(LOGDIR)/$$out.log.txt && \
+	$(XML2RFC) $@ -u -o "$(OUTDIR)/$$out.txt" 2>$(LOGDIR)/$$out-txt.err.txt >$(LOGDIR)/$$out-txt.log.txt && \
 	echo "Ok." || echo "ERROR (check the err file)."; \
 	out=`echo $@ | sed "s|.xml|.html|"` ; \
 	out=`cat "$@" | grep docName | head -n 1 | sed "s|.*docName\=\"||" | sed "s|\".*||"`; \
 	echo -n "    - [HTML] format ... " && \
-	$(XML2RFC) $@ --html -u -o "$(OUTDIR)/$$out.html" 2>>$(LOGDIR)/err.txt >>$(LOGDIR)/log.txt && \
+	$(XML2RFC) $@ --html -u -o "$(OUTDIR)/$$out.html" 2>>$(LOGDIR)/$$out-html.err.txt >>$(LOGDIR)/$$out-html.log.txt && \
 	echo "Ok." || echo "ERROR (check the err file)."; \
 	echo
 
